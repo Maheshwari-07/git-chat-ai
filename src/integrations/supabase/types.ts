@@ -14,13 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      documents: {
+        Row: {
+          content: string
+          created_at: string
+          embedding: string
+          file_path: string
+          id: string
+          repo_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          embedding: string
+          file_path: string
+          id?: string
+          repo_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          embedding?: string
+          file_path?: string
+          id?: string
+          repo_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "documents_repo_id_fkey"
+            columns: ["repo_id"]
+            isOneToOne: false
+            referencedRelation: "repos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      repos: {
+        Row: {
+          branch: string
+          chunk_count: number
+          created_at: string
+          file_count: number
+          id: string
+          name: string
+          owner: string
+          status: string
+          url: string
+        }
+        Insert: {
+          branch?: string
+          chunk_count?: number
+          created_at?: string
+          file_count?: number
+          id?: string
+          name: string
+          owner: string
+          status?: string
+          url: string
+        }
+        Update: {
+          branch?: string
+          chunk_count?: number
+          created_at?: string
+          file_count?: number
+          id?: string
+          name?: string
+          owner?: string
+          status?: string
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      match_documents: {
+        Args: {
+          match_count?: number
+          match_repo_id: string
+          query_embedding: string
+        }
+        Returns: {
+          content: string
+          file_path: string
+          id: string
+          similarity: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
