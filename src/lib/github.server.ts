@@ -4,7 +4,7 @@
  * each file into logical, block-aware chunks.
  */
 
-export type RepoRef = { owner: string; name: string; branch?: string };
+export type RepoRef = { owner: string; name: string; branch?: string | undefined };
 
 export type CodeChunk = { filePath: string; content: string };
 
