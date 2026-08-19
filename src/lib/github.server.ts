@@ -77,7 +77,7 @@ export function parseRepoUrl(rawUrl: string): RepoRef {
   if (!match) {
     throw new Error("Enter a valid public GitHub repository URL, e.g. https://github.com/vercel/next.js");
   }
-  return { owner: match[1], name: match[2], branch: match[3] };
+  return { owner: match[1]!, name: match[2]!, branch: match[3] };
 }
 
 function githubHeaders() {
@@ -86,7 +86,7 @@ function githubHeaders() {
     "User-Agent": "RepoChat",
   };
   const token = process.env["GITHUB_TOKEN"];
-  if (token) headers.Authorization = `Bearer ${token}`;
+  if (token) headers["Authorization"] = `Bearer ${token}`;
   return headers;
 }
 

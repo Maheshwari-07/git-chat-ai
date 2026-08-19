@@ -44,5 +44,5 @@ export async function embedTexts(texts: string[]): Promise<number[][]> {
 /** Embeds a single query string. */
 export async function embedQuery(text: string): Promise<number[]> {
   const [vector] = await embedTexts([text]);
-  return vector;
+  return vector!;
 }
